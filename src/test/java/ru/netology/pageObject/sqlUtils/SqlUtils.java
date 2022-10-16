@@ -1,5 +1,6 @@
 package ru.netology.pageObject.sqlUtils;
 
+import lombok.SneakyThrows;
 import lombok.val;
 
 import java.sql.Connection;
@@ -13,7 +14,8 @@ public class SqlUtils {
         return connection;
     }
 
-    public static String getVerificationCode(String login) throws SQLException {
+    @SneakyThrows
+    public static String getVerificationCode(String login) {
         String userId = null;
         val dataSQL = "SELECT id FROM users WHERE login = ?;";
         try (val conn = getConnection();
@@ -41,7 +43,8 @@ public class SqlUtils {
         return code;
     }
 
-    public String getStatusFromDb(String login) throws SQLException {
+    @SneakyThrows
+    public String getStatusFromDb(String login) {
         String statusSQL = "SELECT status FROM users WHERE login = ?;";
         String status = null;
         try (val conn = getConnection();
@@ -56,7 +59,8 @@ public class SqlUtils {
         return status;
     }
 
-    public static void cleanDb() throws SQLException {
+    @SneakyThrows
+    public static void cleanDb() {
         String deleteCards = "DELETE FROM cards; ";
         String deleteAuthCodes = "DELETE FROM auth_codes; ";
         String deleteUsers = "DELETE FROM users; ";

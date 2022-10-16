@@ -8,8 +8,6 @@ import ru.netology.pageObject.data.DataHelper;
 import ru.netology.pageObject.page.LoginPage;
 import ru.netology.pageObject.sqlUtils.SqlUtils;
 
-import java.sql.SQLException;
-
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,7 +20,7 @@ public class LoginTest {
     }
 
     @Test
-    void shouldLogin() throws SQLException {
+    void shouldLogin() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getValidAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
@@ -32,7 +30,7 @@ public class LoginTest {
     }
 
     @Test
-    void shouldCheckIfBlockedAfter3LoginWithInvalidPassword() throws SQLException {
+    void shouldCheckIfBlockedAfter3LoginWithInvalidPassword() {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getAuthInfoWithInvalidPassword();
         loginPage.validLogin(authInfo);
@@ -45,7 +43,7 @@ public class LoginTest {
     }
 
     @AfterAll
-    static void close() throws SQLException {
+    static void close() {
         SqlUtils.cleanDb();
     }
 }
